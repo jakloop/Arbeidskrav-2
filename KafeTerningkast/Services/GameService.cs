@@ -15,7 +15,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Strategispill"
         },
         new BoardGame
         {
@@ -26,7 +26,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Strategispill"
         },
 
         new BoardGame
@@ -38,7 +38,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Terningspill"
         },
         new BoardGame
         {
@@ -49,7 +49,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Strategispill"
         },
 
         new BoardGame
@@ -61,19 +61,19 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Kortspill"
         },
 
         new BoardGame
         {
             Id = 6,
             Name = "Sjakk",
-            MinPlayers = 3,
-            MaxPlayers = 4,
+            MinPlayers = 2,
+            MaxPlayers = 2,
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Brettspill"
         },
 
         new BoardGame
@@ -85,7 +85,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Brettspill"
         },
 
         new BoardGame
@@ -97,7 +97,7 @@ public class GameService
             PlayTimeMinutes = 90,
             Category = "",
             Rating = 5,
-            Description = ""
+            Description = "Quizspill"
         }
     };
 
