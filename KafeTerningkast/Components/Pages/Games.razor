@@ -1,0 +1,23 @@
+@page "/games"
+@using KafeTerningkast.Models
+@using KafeTerningkast.Services
+@inject GameService GameService
+
+<PageTitle>Games</PageTitle>
+
+<h1>Brettspill</h1>
+
+<p>Vårt utvalg av brettspill</p>
+
+// Spillerkortene
+
+@code {
+
+    private List<BoardGame> games = new();
+
+    protected override void OnInitialized()
+    {
+        games = GameService.GetAllGames();
+    }
+
+}
