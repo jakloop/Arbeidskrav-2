@@ -9,6 +9,13 @@
 
 <p>Vårt utvalg av brettspill</p>
 
+<input type="text"
+       class ="form-control"
+       placeholder="Søk etter spill..."
+       @bind="searchText"
+       @bind:event="oninput" />
+
+
 @if (games == null)
 {
     <p>
@@ -26,7 +33,8 @@ else
 @code {
 
     private List<BoardGame> games = new();
-
+    private string searchText = "";
+    
     protected override void OnInitialized()
     {
         games = GameService.GetAllGames();
