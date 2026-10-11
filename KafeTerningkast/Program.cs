@@ -1,6 +1,12 @@
 using KafeTerningkast.Components;
+using KafeTerningkast.Models;
+using KafeTerningkast.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+// Add gameservice to services - giving the app access to gameservice
+builder.Services.AddSingleton<GameService>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
