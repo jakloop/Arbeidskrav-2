@@ -1,0 +1,38 @@
+@using KafeTerningkast.Models
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="/images/bikesprite2.png"
+                 class="img-fluid rounded-start"
+                 style="width: 100px;"
+                 alt="Game illustration">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Game.Name</h5>
+                <p class="card-text">@Game.Description</p>
+                <p> Antall spillere: 
+                    @if (Game.MinPlayers == Game.MaxPlayers)
+                    {
+                        @Game.MinPlayers
+                    }
+                    else
+                    {
+                        @($"{Game.MinPlayers} -{Game.MaxPlayers}")
+                    }
+                </p>
+                <p>Spillengde: @Game.PlayTimeMinutes</p>
+                <p>Kategori: @Game.Category</p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+@code
+{
+    // gamecard can receive a value of this property
+    [Parameter]
+    public BoardGame Game { get; set; } = default!;
+}
