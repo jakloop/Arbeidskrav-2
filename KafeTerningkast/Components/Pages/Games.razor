@@ -9,7 +9,19 @@
 
 <p>Vårt utvalg av brettspill</p>
 
-// Spillerkortene
+@if (games == null)
+{
+    <p>
+        <em>Ingen spill er tilgjengelige for øyeblikket...</em>
+    </p>
+}
+else
+{
+    @foreach (var game in games)
+    {
+        <GameCard Game="game"/>
+    }
+}
 
 @code {
 
@@ -20,4 +32,4 @@
         games = GameService.GetAllGames();
     }
 
-}
+};
