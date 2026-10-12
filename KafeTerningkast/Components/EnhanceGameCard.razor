@@ -1,0 +1,11 @@
+@using KafeTerningkast.Models
+
+<div class="enhanced-card">
+    <GameCard Game ="Game" />
+</div>
+@code
+{
+    // gamecard can receive a value of this property
+    [Parameter]
+    public BoardGame Game { get; set; } = default!;
+}
