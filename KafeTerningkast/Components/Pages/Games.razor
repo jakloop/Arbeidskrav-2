@@ -15,8 +15,16 @@
        @bind="searchText"
        @bind:event="oninput" />
 
+<input type="number"
+       placeholder="Number of players"
+       @bind="playerCount"
+       @bind:event="oninput"
+       min="1"
+       max="8"/>
 
-@if (games == null)
+<FindRandomGame Games="games" />
+
+@if (games.Count == 0)
 {
     <p>
         <em>Ingen spill er tilgjengelige for øyeblikket...</em>
@@ -24,7 +32,9 @@
 }
 else
 {
-    @foreach (var game in games)
+    @foreach 
+        (var game in games.Where(g => g.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+             && (playerCount == null || (g.MinPlayers <= playerCount && g.MaxPlayers >= playerCount))))
     {
         <GameCard Game="game"/>
     }
@@ -34,6 +44,7 @@ else
 
     private List<BoardGame> games = new();
     private string searchText = "";
+    private int? playerCount = null;
     
     protected override void OnInitialized()
     {
