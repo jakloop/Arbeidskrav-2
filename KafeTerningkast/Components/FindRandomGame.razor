@@ -1,0 +1,27 @@
+@using KafeTerningkast.Models
+
+<button class="btn btn-primary" @onclick="FindARandomGame">
+    Finn et tilfeldig spill
+</button>
+
+@if (selectedGame is not null)
+{
+<GameCard Game="selectedGame" />
+}
+
+@code {
+[Parameter]
+public List<BoardGame> Games { get; set; } = new();
+
+private BoardGame? selectedGame;
+private void FindARandomGame()
+{
+if (Games.Count == 0)
+{
+return;
+}
+int randomIndex = Random.Shared.Next(0, Games.Count);
+selectedGame = Games[randomIndex];
+}
+
+}
