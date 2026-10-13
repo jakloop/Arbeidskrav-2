@@ -6,7 +6,12 @@
 
 @if (selectedGame is not null)
 {
+<button class="btn btn-secondary" @onclick="ClearGame">
+        Fjern spill
+</button>
+
 <EnhanceGameCard Game="selectedGame" />
+
 }
 
 @code {
@@ -14,14 +19,20 @@
 public List<BoardGame> Games { get; set; } = new();
 
 private BoardGame? selectedGame;
+
+private void ClearGame()
+{
+selectedGame = null;
+}
+
 private void FindARandomGame()
 {
 if (Games.Count == 0)
 {
 return;
 }
+
 int randomIndex = Random.Shared.Next(0, Games.Count);
 selectedGame = Games[randomIndex];
 }
-
 }
