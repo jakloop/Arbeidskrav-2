@@ -9,15 +9,46 @@
 
 <p>Vårt utvalg av brettspill</p>
 
-// Spillerkortene
+<input type="text"
+       class ="form-control"
+       placeholder="Søk etter spill..."
+       @bind="searchText"
+       @bind:event="oninput" />
+
+<input type="number"
+       placeholder="Number of players"
+       @bind="playerCount"
+       @bind:event="oninput"
+       min="1"
+       max="8"/>
+
+<FindRandomGame Games="games" />
+
+@if (games.Count == 0)
+{
+    <p>
+        <em>Ingen spill er tilgjengelige for øyeblikket...</em>
+    </p>
+}
+else
+{
+    @foreach 
+        (var game in games.Where(g => g.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+             && (playerCount == null || (g.MinPlayers <= playerCount && g.MaxPlayers >= playerCount))))
+    {
+        <GameCard Game="game"/>
+    }
+}
 
 @code {
 
     private List<BoardGame> games = new();
-
+    private string searchText = "";
+    private int? playerCount = null;
+    
     protected override void OnInitialized()
     {
         games = GameService.GetAllGames();
     }
 
-}
+};
