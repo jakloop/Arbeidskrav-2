@@ -24,7 +24,7 @@
 
 <div class="filter-matches">Antall treff: @FilteredGames.Count</div>
 
-<FindRandomGame Games="_games"
+<FindRandomGame Games="FilteredGames"
                 OnGameSelected="SetSelectedGame"/>
 
 @if (selectedGame is not null &&
