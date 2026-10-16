@@ -4,28 +4,15 @@
     Finn et tilfeldig spill
 </button>
 
-@if (selectedGame is not null)
-{
-<button class="btn btn-secondary" @onclick="ClearGame">
-        Fjern spill
-</button>
-
-<EnhanceGameCard Game="selectedGame" />
-
-}
-
 @code {
 [Parameter]
 public List<BoardGame> Games { get; set; } = new();
 
-private BoardGame? selectedGame;
+[Parameter]
+public EventCallback<BoardGame> OnGameSelected { get; set; }
 
-private void ClearGame()
-{
-selectedGame = null;
-}
 
-private void FindARandomGame()
+private async Task FindARandomGame()
 {
 if (Games.Count == 0)
 {
@@ -33,6 +20,8 @@ return;
 }
 
 int randomIndex = Random.Shared.Next(0, Games.Count);
-selectedGame = Games[randomIndex];
+BoardGame selectedGame = Games[randomIndex];
+
+await OnGameSelected.InvokeAsync(selectedGame);
 }
 }

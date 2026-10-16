@@ -22,33 +22,43 @@
        min="1"
        max="8"/>
 
-<FindRandomGame Games="games" />
+<div class="filter-matches">Antall treff: @FilteredGames.Count</div>
 
-@if (games.Count == 0)
+<FindRandomGame Games="FilteredGames"
+                OnGameSelected="SetSelectedGame"/>
+
+@if (selectedGame is not null &&
+     FilteredGames.Any(g => g.Id == selectedGame.Id))
 {
-    <p>
-        <em>Ingen spill er tilgjengelige for øyeblikket...</em>
-    </p>
+    <EnhanceGameCard Game="selectedGame" />
 }
-else
-{
-    @foreach 
-        (var game in games.Where(g => g.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-             && (playerCount == null || (g.MinPlayers <= playerCount && g.MaxPlayers >= playerCount))))
+@foreach (var game in FilteredGames.Where(
+                  g => selectedGame is null || g.Id != selectedGame.Id))
     {
         <GameCard Game="game"/>
     }
-}
+
 
 @code {
 
-    private List<BoardGame> games = new();
+    private List<BoardGame> _games = new();
     private string searchText = "";
     private int? playerCount = null;
+
+    private BoardGame? selectedGame;
+
+    private void SetSelectedGame(BoardGame game)
+    {
+        selectedGame = game;
+    }
+
+    private List<BoardGame> FilteredGames =>
+        _games.Where(g => g.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase)
+                         && (playerCount == null || (g.MinPlayers <= playerCount && g.MaxPlayers >= playerCount)))
+            .ToList();
     
     protected override void OnInitialized()
     {
-        games = GameService.GetAllGames();
+        _games = GameService.GetAllGames();
     }
-
 };
