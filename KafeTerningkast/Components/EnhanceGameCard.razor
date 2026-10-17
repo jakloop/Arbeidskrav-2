@@ -1,11 +1,15 @@
 @using KafeTerningkast.Models
 
 <div class="enhanced-card">
-    <GameCard Game ="Game" />
+    <GameCard Game ="Game" 
+              OnGameNightSelected="OnGameNightSelected" />
 </div>
 @code
 {
     // gamecard can receive a value of this property
     [Parameter]
     public BoardGame Game { get; set; } = default!;
+    
+    [Parameter]
+    public EventCallback<BoardGame> OnGameNightSelected { get; set; }
 }
