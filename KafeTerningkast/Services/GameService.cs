@@ -11,45 +11,45 @@ public class GameService
             Id = 1,
             Name = "Den forvunnede diamant",
             MinPlayers = 2,
-            MaxPlayers = 4,
-            PlayTimeMinutes = 90,
-            Category = "",
-            Rating = 5,
-            Description = "Strategispill"
+            MaxPlayers = 5,
+            PlayTimeMinutes = 30,
+            Category = "Familiespill",
+            Rating = 4,
+            Description = "Et kappløp på det afrikanske kontinentet på leting etter den verdifulle diamanten"
         },
         new BoardGame
         {
             Id = 2,
             Name = "Risk",
-            MinPlayers = 3,
-            MaxPlayers = 4,
-            PlayTimeMinutes = 90,
-            Category = "",
+            MinPlayers = 2,
+            MaxPlayers = 6,
+            PlayTimeMinutes = 120,
+            Category = "Strategi",
             Rating = 5,
-            Description = "Strategispill"
+            Description = "Et strategispill hvor du jobber for globalt herredømme"
         },
 
         new BoardGame
         {
             Id = 3,
-            Name = "Yatzee",
+            Name = "Yatzy",
             MinPlayers = 1,
             MaxPlayers = 6,
-            PlayTimeMinutes = 90,
-            Category = "",
+            PlayTimeMinutes = 20,
+            Category = "Terningspill",
             Rating = 5,
-            Description = "Terningspill"
+            Description = "Klassikeren Yatsy er et terningspill hvor du skal sikre deg den beste poengscoren"
         },
         new BoardGame
         {
             Id = 4,
             Name = "Monopol",
             MinPlayers = 2,
-            MaxPlayers = 4,
+            MaxPlayers = 6,
             PlayTimeMinutes = 90,
-            Category = "",
-            Rating = 5,
-            Description = "Strategispill"
+            Category = "Familiespill",
+            Rating = 2,
+            Description = "Kjøp eiendommer, bygg hus og hoteller, og slå motstanderne dine konkurs."
         },
 
         new BoardGame
@@ -57,11 +57,11 @@ public class GameService
             Id = 5,
             Name = "Poker Texas Hold'em",
             MinPlayers = 2,
-            MaxPlayers = 8,
-            PlayTimeMinutes = 90,
-            Category = "",
+            MaxPlayers = 10,
+            PlayTimeMinutes = 60,
+            Category = "Kortspill",
             Rating = 5,
-            Description = "Kortspill"
+            Description = "Det mest populære pokerspillet i verden, basert på taktikk, psykologi og sannsynlighet."
         },
 
         new BoardGame
@@ -70,10 +70,10 @@ public class GameService
             Name = "Sjakk",
             MinPlayers = 2,
             MaxPlayers = 2,
-            PlayTimeMinutes = 90,
-            Category = "",
-            Rating = 5,
-            Description = "Brettspill"
+            PlayTimeMinutes = 45,
+            Category = "Strategi",
+            Rating = 6,
+            Description = "Det ultimate duellspillet med dyp taktikk."
         },
 
         new BoardGame
@@ -82,10 +82,10 @@ public class GameService
             Name = "Othello",
             MinPlayers = 2,
             MaxPlayers = 2,
-            PlayTimeMinutes = 90,
-            Category = "",
-            Rating = 5,
-            Description = "Brettspill"
+            PlayTimeMinutes = 20,
+            Category = "Strategi",
+            Rating = 4,
+            Description = "Et strategispill det tar et minutt å lære, men en mannsalder å mestre"
         },
 
         new BoardGame
@@ -93,11 +93,11 @@ public class GameService
             Id = 8,
             Name = "Bezzerwizzer",
             MinPlayers = 2,
-            MaxPlayers = 2,
-            PlayTimeMinutes = 90,
-            Category = "",
+            MaxPlayers = 6,
+            PlayTimeMinutes = 45,
+            Category = "Quiz",
             Rating = 5,
-            Description = "Quizspill"
+            Description = "Et kunnskapsspill der du kan stjele motstanderens spørsmål og briljere med egen kunnskap."
         }
     };
 
