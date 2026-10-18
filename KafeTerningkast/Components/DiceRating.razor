@@ -1,0 +1,44 @@
+@using KafeTerningkast.Models
+
+<div class="dice-rating">
+    @for (int i = 1; i <= 6; i++)
+    {
+        int diceValue = i;
+        
+        <button type="button"
+                disabled="@ReadOnly"
+                @onclick="() => SelectRating(diceValue)">
+            @(diceValue)
+            
+        </button>
+    }
+    @if (Value >= 1 && Value <= 6)
+    {
+        <p>Terningkast: @Value</p>
+    }
+    else
+    {
+        <p>Ugyldig terningkast</p>
+    }
+</div>
+
+@code
+{
+    [Parameter] 
+    public int Value { get; set; }
+    [Parameter]
+    public EventCallback<int> ValueChanged { get; set; }
+    
+    [Parameter] 
+    public bool ReadOnly { get; set; }
+
+    private async Task SelectRating(int newValue)
+    {
+        if (ReadOnly)
+        {
+            return;
+        }
+        
+        await ValueChanged.InvokeAsync(newValue);
+    }
+}

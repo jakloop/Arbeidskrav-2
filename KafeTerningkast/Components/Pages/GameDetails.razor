@@ -1,0 +1,46 @@
+@page "/games/{id:int}"
+@using KafeTerningkast.Models
+@using KafeTerningkast.Services
+@inject GameService GameService
+
+<h1>Spilldetaljer</h1>
+
+@if (game is null)
+{
+    <div class="container">
+    <p>Fant ikke spillet.</p>
+    <a href="/games">Tilbake til spilloversikten</a>
+    </div>
+}
+else
+{
+    <h2>@game.Name</h2>
+    <p>@game.Category</p>
+    <p>@game.Description</p>
+    <p>Antall spiller: @game.MinPlayers-@game.MaxPlayers</p>
+    <p>Spilletid: @game.PlayTimeMinutes minutter</p>
+    <DiceRating @bind-Value="selectedRating" />
+    <a href="/games">Tilbake til spilloversikten</a>
+}
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+    
+    private int selectedRating;
+
+    private BoardGame? game;
+
+    protected override void OnParametersSet()
+    {
+        game = GameService.GetAllGames()
+            .FirstOrDefault(g => g.Id == Id);
+
+        if (game is not null)
+        {
+            selectedRating = game.Rating;
+        }
+}
+
+}

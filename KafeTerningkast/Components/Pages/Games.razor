@@ -4,13 +4,13 @@
 @inject GameService GameService
 
 <PageTitle>Games</PageTitle>
-
+<div class="container">
 <h1>Brettspill</h1>
 
 <p>Vårt utvalg av brettspill</p>
 
 <input type="text"
-       class ="form-control"
+       class="form-control"
        placeholder="Søk etter spill..."
        @bind="searchText"
        @bind:event="oninput" />
@@ -27,17 +27,32 @@
 <FindRandomGame Games="FilteredGames"
                 OnGameSelected="SetSelectedGame"/>
 
+<div class="container">
+    @if (gameNightConfirmation is not null)
+    {
+        <p>@gameNightConfirmation.Name er valgt til spillekvelden!</p>
+    }
+    
+</div>
+
 @if (selectedGame is not null &&
      FilteredGames.Any(g => g.Id == selectedGame.Id))
 {
-    <EnhanceGameCard Game="selectedGame" />
+    <EnhanceGameCard Game="selectedGame"
+                     OnGameNightSelected="HandleGameNightSelected" />
 }
-@foreach (var game in FilteredGames.Where(
-                  g => selectedGame is null || g.Id != selectedGame.Id))
-    {
-        <GameCard Game="game"/>
-    }
+<div class="container">
+    <div class="row row-cols-2">
+        @foreach (var game in FilteredGames.Where(g => selectedGame is null || g.Id != selectedGame.Id))
+        {
 
+            <GameCard Game="game"
+                      OnGameNightSelected="HandleGameNightSelected" />
+
+        }
+    </div>
+</div>
+</div>
 
 @code {
 
@@ -46,6 +61,8 @@
     private int? playerCount = null;
 
     private BoardGame? selectedGame;
+
+    private BoardGame? gameNightConfirmation;
 
     private void SetSelectedGame(BoardGame game)
     {
@@ -61,4 +78,12 @@
     {
         _games = GameService.GetAllGames();
     }
+
+    private void HandleGameNightSelected(BoardGame game)
+    {
+        gameNightConfirmation = game;
+    }
+    
+    
+    
 };
