@@ -12,7 +12,14 @@
             
         </button>
     }
-    <p>Terningkast: @Value </p>
+    @if (Value >= 1 && Value <= 6)
+    {
+        <p>Terningkast: @Value</p>
+    }
+    else
+    {
+        <p>Ugyldig terningkast</p>
+    }
 </div>
 
 @code

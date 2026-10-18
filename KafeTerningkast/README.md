@@ -34,7 +34,7 @@ et spill basert på en tilfeldig index i listen.
 ## Tester Oppgave 1
 I denne oppgaven har jeg gjennomført følgende manuelle tester:
 
-# Testtabell
+### Testtabell - oppgave 1
 
 | Hva testes?                                              | Forventet resultat          | Faktisk resultat            | Bestått? |
 |:---------------------------------------------------------|:----------------------------|:----------------------------|:---------|
@@ -47,5 +47,37 @@ I denne oppgaven har jeg gjennomført følgende manuelle tester:
 
 
 # Oppgave 2 -
+
+
+### Testtabell - oppgave 2
+
+| Hva testes?                                              | Forventet resultat        | Faktisk resultat          | Bestått? |
+|:---------------------------------------------------------|:--------------------------|:--------------------------|:---------|
+| Åpne games/ med en ID som ikke finnes                    | Fant ikke spillet         | Fant ikke spillet         | Bestått  |
+| Åpne /games/abc                                          | Not found                 | Not found                 | Bestått  |
+| Forelder får riktig verdi når man trykker på terningkast | Forleder får riktig verdi | Forelder får riktig verdi | Bestått  |
+| DiceRating er Readonly og ikke klikkbar i /games         | Readonly fungerer         | Readonly fungerer         | Bestått  |
+| Verdi utenfor 1-6                                        | Ugyldig verdi             | Ugydlig verdi             | Bestått  |
+| Menyen er markert og følger siden jeg er på              | Markert                   | Markert                   | Bestått  |
+
+### Forklaring for hvorfor games/abc ikke treffer spillsiden
+Den treffer ikke spillsiden, fordi verdien {game.Id} er en integer. Dermed så feiler navigeringen til spillsiden
+og man får opp feilmeldingen
+
+### DiceRating får en ugyldig verdi
+
+I det ene kanttilfellet så sender man en verdi utenfor 1-6 inn til DiceRating. Dette gjøres ved å legge inn denne 
+linjen i GameDetails.razor
+
+```
+    <DiceRating Value="7" ReadOnly="true" />
+```
+Svaret jeg får er TerningKast: 7 - som er en ugydlig verdi. 
+
+Dette kanttilfellet løste jeg med en enkel if-setning i DiceRating.razor som kontrollerer om verdien er mellom 1 og 6.
+Hvis den er ugyldig nå så vil meldingen "ugyldig terningkast" vises.  Komponenten endrer altså ikke den ugyldige verdien men viser en feilmelding. 
+
+
+
 Kilder:
 Bootstrap card "Horizontal" - https://getbootstrap.com/docs/5.3/components/card/#grid-cards
