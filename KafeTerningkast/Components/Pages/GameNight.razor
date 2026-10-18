@@ -1,1 +1,23 @@
 @page "/game-night"
+
+@using KafeTerningkast.Services;
+
+@inject GameNightState GameNightState;
+@inject GameService GameService;
+
+
+@foreach (var game in GameNightState.GetAllGameNightGames())
+{
+    <p>@game.Name</p>
+}
+
+@code
+{
+    protected override void OnInitialized()
+    {
+        var games = GameService.GetAllGames();
+
+        GameNightState.AddGame(games[0]);
+        GameNightState.AddGame(games[1]);
+    }
+}
