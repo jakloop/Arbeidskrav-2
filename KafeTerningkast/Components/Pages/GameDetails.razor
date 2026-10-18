@@ -7,7 +7,10 @@
 
 @if (game is null)
 {
+    <div class="container">
     <p>Fant ikke spillet.</p>
+    <a href="/games">Tilbake til spilloversikten</a>
+    </div>
 }
 else
 {
@@ -17,6 +20,7 @@ else
     <p>Antall spiller: @game.MinPlayers-@game.MaxPlayers</p>
     <p>Spilletid: @game.PlayTimeMinutes minutter</p>
     <DiceRating @bind-Value="selectedRating" />
+    <a href="/games">Tilbake til spilloversikten</a>
 }
 
 @code
