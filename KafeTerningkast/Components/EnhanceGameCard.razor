@@ -2,7 +2,8 @@
 
 <div class="enhanced-card">
     <GameCard Game ="Game" 
-              OnGameNightSelected="OnGameNightSelected" />
+              OnGameNightSelected="OnGameNightSelected"
+              OnGameNightRemoved="OnGameNightRemoved" />
 </div>
 @code
 {
@@ -12,4 +13,7 @@
     
     [Parameter]
     public EventCallback<BoardGame> OnGameNightSelected { get; set; }
+    
+    [Parameter]
+    public EventCallback<BoardGame> OnGameNightRemoved { get; set; }
 }
