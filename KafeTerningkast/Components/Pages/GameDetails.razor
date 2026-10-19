@@ -2,6 +2,7 @@
 @using KafeTerningkast.Models
 @using KafeTerningkast.Services
 @inject GameService GameService
+@inject GameNightState GameNightState
 
 <h1>Spilldetaljer</h1>
 
@@ -20,7 +21,20 @@ else
     <p>Antall spiller: @game.MinPlayers-@game.MaxPlayers</p>
     <p>Spilletid: @game.PlayTimeMinutes minutter</p>
     <DiceRating @bind-Value="selectedRating" />
+    @if (GameNightState.ContainsGame(game.Id))
+    {
+        <button @onclick="() => GameNightState.RemoveGame(game)">
+            Fjern fra spillekveld
+        </button>
+    }
+    else
+    {
+        <button @onclick="() => GameNightState.AddGame(game)">
+            Legg til i spillekveld
+        </button>
+    }
     <a href="/games">Tilbake til spilloversikten</a>
+    
 }
 
 @code
