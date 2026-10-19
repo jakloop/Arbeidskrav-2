@@ -1,4 +1,6 @@
 @using KafeTerningkast.Models
+@using KafeTerningkast.Services
+@inject GameNightState GameNightState
 
 <div class="card m-3 col" style="max-width: 540px;">
     <div class="row g-0">
@@ -28,10 +30,18 @@
                 <a class="btn btn-primary" href="@($"/games/{Game.Id}")">
                     Se detaljer
                 </a>
-                <button class="btn btn-primary"
-                        @onclick="() => OnGameNightSelected.InvokeAsync(Game)">
-                    Legg til i din spillkveld
-                </button>
+                @if (GameNightState.ContainsGame(Game.Id))
+                {
+                    <button @onclick="() => OnGameNightRemoved.InvokeAsync(Game)">
+                        Fjern fra spillekveld
+                    </button>
+                }
+                else
+                {
+                    <button @onclick="() => OnGameNightSelected.InvokeAsync(Game)">
+                        Legg til i spillekveld
+                    </button>
+                }
             </div>
         </div>
     </div>
@@ -45,4 +55,7 @@
     
     [Parameter]
     public EventCallback<BoardGame> OnGameNightSelected { get; set; }
+    
+    [Parameter]
+    public EventCallback<BoardGame> OnGameNightRemoved { get; set; }
 }
