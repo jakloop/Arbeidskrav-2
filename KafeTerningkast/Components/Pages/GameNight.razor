@@ -1,23 +1,34 @@
 @page "/game-night"
 
 @using KafeTerningkast.Services;
-
+@using KafeTerningkast.Models;
 @inject GameNightState GameNightState;
 @inject GameService GameService;
 
 
+@if (GameNightState.Count > 0)
+{
+    <p>
+        Total spilletid:
+        @GameNightState.GetAllGameNightGames().Sum(game => game.PlayTimeMinutes) minutter
+    </p>
+}
+else
+{
+    <p>Du har ikke valgt noen spill til spillekvelden enda.</p>
+}
 @foreach (var game in GameNightState.GetAllGameNightGames())
 {
     <p>@game.Name</p>
-}
 
+    <button @onclick="() => RemoveGame(game)">
+        Fjern spill
+    </button>
+}
 @code
 {
-    protected override void OnInitialized()
+    private void RemoveGame(BoardGame game)
     {
-        var games = GameService.GetAllGames();
-
-        GameNightState.AddGame(games[0]);
-        GameNightState.AddGame(games[1]);
+        GameNightState.RemoveGame(game);
     }
 }
