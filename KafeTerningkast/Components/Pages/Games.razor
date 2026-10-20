@@ -2,6 +2,7 @@
 @using KafeTerningkast.Models
 @using KafeTerningkast.Services
 @inject GameService GameService
+@inject GameNightState GameNightState
 
 <PageTitle>Games</PageTitle>
 <div class="container">
@@ -24,6 +25,7 @@
 
 <div class="filter-matches">Antall treff: @FilteredGames.Count</div>
 
+
 <FindRandomGame Games="FilteredGames"
                 OnGameSelected="SetSelectedGame"/>
 
@@ -39,7 +41,8 @@
      FilteredGames.Any(g => g.Id == selectedGame.Id))
 {
     <EnhanceGameCard Game="selectedGame"
-                     OnGameNightSelected="HandleGameNightSelected" />
+                     OnGameNightSelected="HandleGameNightSelected"
+                     OnGameNightRemoved="HandleGameNightRemoved" />
 }
 <div class="container">
     <div class="row row-cols-2">
@@ -47,7 +50,8 @@
         {
 
             <GameCard Game="game"
-                      OnGameNightSelected="HandleGameNightSelected" />
+                      OnGameNightSelected="HandleGameNightSelected"
+                      OnGameNightRemoved="HandleGameNightRemoved" />
 
         }
     </div>
@@ -59,9 +63,7 @@
     private List<BoardGame> _games = new();
     private string searchText = "";
     private int? playerCount = null;
-
     private BoardGame? selectedGame;
-
     private BoardGame? gameNightConfirmation;
 
     private void SetSelectedGame(BoardGame game)
@@ -77,13 +79,19 @@
     protected override void OnInitialized()
     {
         _games = GameService.GetAllGames();
+       
     }
+    
 
     private void HandleGameNightSelected(BoardGame game)
     {
+        GameNightState.AddGame(game);
         gameNightConfirmation = game;
     }
     
-    
+    private void HandleGameNightRemoved(BoardGame game)
+    {
+        GameNightState.RemoveGame(game);
+    }
     
 };

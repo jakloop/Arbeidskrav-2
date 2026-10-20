@@ -1,4 +1,9 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using KafeTerningkast.Services
+@inject GameNightState GameNightState
+@implements IDisposable
+
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">KafeTerningkast</a>
     </div>
@@ -23,9 +28,29 @@
         
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="game-night">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Spillkveld
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Spillkveld (@GameNightState.Count)
             </NavLink>
         </div>
         
+
+        
     </nav>
 </div>
+
+@code {
+    // these functions watches whether GameNightState.Count is changed and updates
+    protected override void OnInitialized()
+    {
+        GameNightState.OnChange += HandleStateChanged;
+    }
+
+    private void HandleStateChanged()
+    {
+        _ = InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        GameNightState.OnChange -= HandleStateChanged;
+    }
+}
